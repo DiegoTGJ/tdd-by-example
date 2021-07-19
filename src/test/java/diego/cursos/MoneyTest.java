@@ -15,7 +15,7 @@ public class MoneyTest {
     void setUp() {
         bank = new Bank();
         bank.addRate("CHF","USD",2);
-
+        bank.addRate("CLP","USD",2);
         fiveBucks = Money.dollar(5);
         tenFrancs = Money.franc(10);
     }
