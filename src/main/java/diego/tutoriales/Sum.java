@@ -1,16 +1,21 @@
 package diego.tutoriales;
 
 public class Sum implements Expression {
-    Money augmend;
-    Money addend;
+    Expression augmend;
+    Expression addend;
 
-    public Sum(Money augmend, Money addmend) {
+    public Sum(Expression augmend, Expression addend) {
         this.augmend = augmend;
-        this.addend = addmend;
+        this.addend = addend;
     }
     @Override
     public Money reduce(Bank bank,String toCurrency){
-        int amount = augmend.amount + addend.amount;
+        int amount = augmend.reduce(bank,toCurrency).amount + addend.reduce(bank, toCurrency).amount;
         return new Money(amount,toCurrency);
+    }
+
+    @Override
+    public Expression plus(Expression addend) {
+        return null;
     }
 }

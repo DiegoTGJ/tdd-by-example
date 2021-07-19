@@ -1,11 +1,18 @@
 package diego.tutoriales;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 public class MoneyTest {
+    private Bank bank;
+    @BeforeEach
+    void setUp() {
+        bank = new Bank();
+        bank.addRate("CHF","USD",2);
+    }
 
     @Test
     void testMultiplication() {
@@ -69,9 +76,7 @@ public class MoneyTest {
 
     @Test
     void testReduceMoneyDifferentCurrency() {
-        Bank bank = new Bank();
-        bank.addRate("CHF","USD", 2);
-        Money result = bank.reduce(Money.franc(2), "USD");
+        Money result = this.bank.reduce(Money.franc(2), "USD");
         assertEquals(Money.dollar(1), result);
     }
 
@@ -79,5 +84,14 @@ public class MoneyTest {
     void testIdentityRate() {
         assertEquals(1, new Bank().rate("USD", "USD"));
         assertEquals(1, new Bank().rate("CHF", "CHF"));
+    }
+
+    @Test
+    public void testMixedAddition(){
+        Expression fiveBucks = Money.dollar(5);
+        Expression tenFrancs = Money.franc(10);
+        Money result = bank.reduce(fiveBucks.plus(tenFrancs),"USD");
+        assertEquals(Money.dollar(10),result);
+
     }
 }
