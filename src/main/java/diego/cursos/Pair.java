@@ -1,4 +1,4 @@
-package diego.tutoriales;
+package diego.cursos;
 
 import java.util.Objects;
 

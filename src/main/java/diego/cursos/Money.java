@@ -1,4 +1,4 @@
-package diego.tutoriales;
+package diego.cursos;
 
 public class Money implements Expression {
     protected int amount;
@@ -19,6 +19,7 @@ public class Money implements Expression {
         return this.currency;
     }
 
+    @Override
     public Expression times(int multiplier){
         return new Money(this.amount*multiplier,this.currency);
     }
